@@ -1,4 +1,5 @@
 import time
+from binary_search_tree import BinarySearchTree
 
 start_time = time.time()
 
@@ -11,10 +12,30 @@ names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
 duplicates = []
-for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+"""
+Below is original implementation with nested for loop and O(n^2) runtime
+"""
+# for name_1 in names_1:
+#     for name_2 in names_2:
+#         if name_1 == name_2:
+#             duplicates.append(name_1)
+
+"""
+Below is for loop with a nested BST which is O(n log(n)) runtime
+"""
+# initialize bst with first name
+bst = BinarySearchTree(names_1[0])
+# append all other names in first file to bst
+for i in names_1[1:]:
+    bst.insert(i)
+
+# loop through names_2 and if bst contains the name, append to duplicates
+for j in names_2:
+    if bst.contains(j):
+        duplicates.append(j)
+
+
+
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
