@@ -23,15 +23,29 @@ Below is original implementation with nested for loop and O(n^2) runtime
 """
 Below is for loop with a nested BST which is O(n log(n)) runtime
 """
-# initialize bst with first name
-bst = BinarySearchTree(names_1[0])
-# append all other names in first file to bst
-for i in names_1[1:]:
-    bst.insert(i)
+# # initialize bst with first name
+# bst = BinarySearchTree(names_1[0])
+# # append all other names in first file to bst
+# for i in names_1[1:]:
+#     bst.insert(i)
 
-# loop through names_2 and if bst contains the name, append to duplicates
+# # loop through names_2 and if bst contains the name, append to duplicates
+# for j in names_2:
+#     if bst.contains(j):
+#         duplicates.append(j)
+
+"""
+Below is hash table to try and get runtime to O(2n) = O(n)
+"""
+# initialize hash table
+lookup = {}
+
+# loop through names1 and add keys to hash table for each name.  Value is irrelevant, we just care about the keys.
+for i in names_1:
+    lookup[i] = 1
+
 for j in names_2:
-    if bst.contains(j):
+    if j in lookup.keys():
         duplicates.append(j)
 
 
